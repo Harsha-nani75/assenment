@@ -1,0 +1,38 @@
+<div class="container">
+    <!-- View Block -->
+<div *ngIf="!isEdit">
+    <div class="user-table">
+      <table>
+        <tr *ngFor="let user of data; let i = index">
+          <td>{{ user.firstName | uppercase }} {{ user.Lname | uppercase }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phnum }}</td>
+          <td><button class="btn btn-secondary" (click)="edit(user)">Edit</button></td>
+        </tr>
+      </table>
+      <button class="btn btn-primary" (click)="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+  
+  <!-- Edit Block -->
+  <div *ngIf="isEdit">
+    <div class="container">
+      <form [formGroup]="editForm" *ngFor="let x of data" class="edit-form">
+        <div class="mb-3">
+          <input type="text" formControlName="firstName" placeholder="First Name" [(ngModel)]="x.firstName" class="form-control">
+        </div>
+        <div class="mb-3">
+          <input type="text" formControlName="lastName" placeholder="Last Name" [(ngModel)]="x.Lname" class="form-control">
+        </div>
+        <div class="mb-3">
+          <input type="email" formControlName="email" placeholder="Email" [(ngModel)]="x.email" class="form-control">
+        </div>
+        <div class="mb-3">
+          <input type="tel" formControlName="phoneNumber" placeholder="Phone Number" [(ngModel)]="x.phnum" class="form-control">
+        </div>
+        <button type="button" (click)="updateUser()" class="btn btn-secondary">Update</button>
+      </form>
+    </div>
+  </div>
+  

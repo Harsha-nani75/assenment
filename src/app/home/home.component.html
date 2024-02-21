@@ -1,0 +1,51 @@
+<!-- home.component.html -->
+<div class="container mt-5">
+    <div *ngIf="authService.isLoggedIn" class="mb-4">
+      <button class="btn btn-primary" (click)="logout()">Logout</button>
+      
+  
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="mb-4">
+        <div class="mb-3">
+          <label for="firstName" class="form-label">First Name:</label>
+          <input type="text" id="firstName" formControlName="fname" class="form-control" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Last Name:</label>
+          <input type="text" id="lastName" formControlName="lname" class="form-control" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" id="email" formControlName="email" class="form-control" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="phoneNumber" class="form-label">Phone Number:</label>
+          <input type="tel" id="phoneNumber" formControlName="pno" class="form-control" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>S.no</th>
+            <th>Name</th>
+            <th>Email Id.</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of data; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ user.firstName | uppercase }} {{ user.Lname | uppercase }}</td>
+            <td>{{ user.email }}</td>
+            <td><a [routerLink]="['/edit', user.id]" class="btn btn-secondary">Edit</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    </div>
